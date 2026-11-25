@@ -1,11 +1,25 @@
 ---
 name: react-source-string
-description: Find the file and line that rendered an element on a React page in development, and set up the react-source-string plugins (Vite, Next.js/SWC, Babel) that tag JSX with data-source="path:line". Use when the user points at something on the page ("fix this button", "change the text in the checkout card"), pastes a reference like `src/pages/Checkout.tsx:42 <button> "Pay"`, when the DOM has data-source attributes or window.__REACT_SOURCE__ exists, or when the user asks to add source locations, Alt+click-to-source or the overlay to a React project.
+description: Find the file and line that rendered an element on a React page in development, and set up the react-source-string plugins (Vite, Next.js/SWC, Babel) that tag JSX with data-source="path:line". The lookup needs one of these plugins in the project's dev build; without it the skill offers to install the plugin first. Use when the user points at something on the page ("fix this button", "change the text in the checkout card"), pastes a reference like `src/pages/Checkout.tsx:42 <button> "Pay"`, when the DOM has data-source attributes or window.__REACT_SOURCE__ exists, or when the user asks to add source locations, Alt+click-to-source or the overlay to a React project.
+license: MIT
+compatibility: Requires a React project with one of the react-source-string build plugins enabled in development (vite-plugin-react-source-string, swc-plugin-react-source-string for Next.js, or babel-plugin-react-source-string). Installing one needs npm access and a change to the bundler config.
 ---
 
 # Find the code behind a React element
 
 The react-source-string plugins tag every JSX element in development with `data-source="path:line"`: the file and the line of the element's opening `<`, relative to the project root. With the `overlay` option on, the page also gets Alt + click to copy a reference and a `window.__REACT_SOURCE__` lookup API.
+
+## Requires a plugin in the project
+
+This skill does not work on its own. The `data-source` attributes, Alt + click and `__REACT_SOURCE__` come from a build plugin, so the project must have one of them enabled in its dev build:
+
+| Bundler | npm package |
+| --- | --- |
+| Vite | `vite-plugin-react-source-string` |
+| Next.js (SWC) | `swc-plugin-react-source-string` |
+| Babel (webpack, Rspack, Next.js with a Babel config, Metro) | `babel-plugin-react-source-string` |
+
+Check before the first lookup in a project: look for the package in `package.json` `devDependencies` and in the bundler config. If it is missing, tell the user that the source locations need the plugin, and offer to set it up with [Set up the plugins](#set-up-the-plugins) below. Install it only after the user agrees: it adds a dev dependency and changes the bundler config. Until then, fall back to searching the repository and say that the result is a guess.
 
 Use the source location instead of searching the repository for the text you see on the page. A text search finds every "Pay" in the codebase; `data-source` names the one that is on the screen.
 

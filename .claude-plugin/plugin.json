@@ -1,7 +1,7 @@
 {
   "name": "react-source-string",
   "description": "Find the file and line behind any element on a React page (data-source=\"path:line\", Alt + click, window.__REACT_SOURCE__), and set up the Vite, Next.js/SWC and Babel plugins that make it work.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": { "name": "tanchu", "url": "https://github.com/tanchu" },
   "homepage": "https://github.com/tanchu/react-source-skills",
   "repository": "https://github.com/tanchu/react-source-skills",
