@@ -1,0 +1,14 @@
+{
+  "name": "react-source-skills",
+  "owner": { "name": "tanchu", "url": "https://github.com/tanchu" },
+  "metadata": {
+    "description": "Agent skills for the react-source-string plugins (Vite, Next.js/SWC, Babel)."
+  },
+  "plugins": [
+    {
+      "name": "react-source-string",
+      "source": "./",
+      "description": "Find the file and line behind any element on a React page, and set up the react-source-string plugins."
+    }
+  ]
+}
